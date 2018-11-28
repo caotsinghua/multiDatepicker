@@ -1,0 +1,3 @@
+{
+    "extends": ["airbnb", "shanbay", "prettier", "prettier/react"]
+}
