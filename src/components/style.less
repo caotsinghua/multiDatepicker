@@ -1,0 +1,43 @@
+.calendars {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    .calendar-wrap {
+        width: 300px;
+        border: 1px solid #d9d9d9;
+        border-radius: 4px;
+
+        .ant-fullcalendar-header {
+            display: none;
+        }
+        .title {
+            text-align: center;
+            margin: 0;
+            line-height: 30px;
+        }
+        .calendar {
+            &-date {
+                border: 1px solid rgb(83, 211, 162);
+                transition: 0.3s ease-in;
+                text-align: center;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                border-radius: 15px;
+                cursor: pointer;
+                &.selected {
+                    background: rgb(83, 211, 162);
+                    &:hover {
+                        background: rgb(83, 211, 162);
+                    }
+                }
+                &:active {
+                    background: rgb(34, 117, 85);
+                }
+                &:hover {
+                    background: rgb(88, 218, 235);
+                }
+            }
+        }
+    }
+}
