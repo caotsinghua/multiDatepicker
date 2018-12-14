@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="video-wrap">
+            <canvas class="m-canvas" id="m-canvas"></canvas>
+            <video
+                src="https://sbay-debug.baydn.com/speaking-test/nirbs/bb1a369d6ce4abe3c7e2915b09e8dd1a.57cd6d2846bf453f3c75c2f0b5f703d0.mp4?auth_key=1544684772-0-0-128a7d0aa68503d6544f3abc671fd756"
+                controls="controls"
+                preload="auto"
+                webkit-playsinline="true"
+                x-webkit-airplay="true"
+                playsinline="true"
+                x5-playsinline
+            ></video>
+        </div>
+        <script>
+            class FixVideo {
+                constructor(
+                    { videoEl, canvasEl, src, autoplay, ...params } = {
+                        src: '',
+                        preload: true,
+                        controls: 'controls',
+                        muted: false,
+                        playsinline: true,
+                    },
+                ) {
+                    if (!this.videoEl || !this.canvasEl) {
+                        throw new Error('添加video 或 canvas');
+                    }
+                    this.videoEl = videoEl;
+                    this.canvasEl = canvasEl;
+                    Object.keys(params).forEach(key => {
+                        if (key) {
+                            videoEl[key] = params[key];
+                        }
+                    });
+                }
+                autoplay() {
+                    if (document.onWeixinJSBridgeReady) {
+                        // x5
+                        document.addEventListener('WeixinJSBridgeReady', () => {
+                            this.videoEl.play();
+                        });
+                    } else {
+                        this.videoEl.autoplay = true;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

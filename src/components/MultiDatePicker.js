@@ -13,15 +13,7 @@ import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 const noop = () => {};
 class MultiDatePicker extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        this.dateCellRender = this.dateCellRender.bind(this);
-        this.dateFullCellRender = this.dateFullCellRender.bind(this);
-        this.onSelect = this.onSelect.bind(this);
-    }
-
-    async onSelect(date) {
+    onSelect = async date => {
         const { value, onChange } = this.props;
         if (value.find(item => date.isSame(item))) {
             // 重复选择，取消
@@ -29,9 +21,9 @@ class MultiDatePicker extends Component {
         } else {
             onChange(value.concat(date));
         }
-    }
+    };
 
-    getAllMonths() {
+    getAllMonths = () => {
         const { startTime, endTime } = this.props;
         let allMonths = [];
         if (moment(startTime).isAfter(moment(endTime))) {
@@ -105,9 +97,9 @@ class MultiDatePicker extends Component {
             ];
         }
         return allMonths;
-    }
+    };
 
-    getCalendars() {
+    getCalendars = () => {
         const months = this.getAllMonths();
         const { calendarStyle } = this.props;
         return months.map((month, index) => (
@@ -128,9 +120,9 @@ class MultiDatePicker extends Component {
                 />
             </div>
         ));
-    }
+    };
 
-    dateFullCellRender(date, currentMonth) {
+    dateFullCellRender = (date, currentMonth) => {
         const { value } = this.props;
         if (
             moment(date).isBetween(
@@ -147,9 +139,9 @@ class MultiDatePicker extends Component {
             return this.dateCellRender(date);
         }
         return null;
-    }
+    };
 
-    dateCellRender(value, isSelected = false) {
+    dateCellRender = (value, isSelected = false) => {
         const dateClassName = classNames('calendar-date', {
             selected: isSelected,
         });
@@ -158,9 +150,9 @@ class MultiDatePicker extends Component {
                 <div className="calendar-value">{value && value.date()}</div>
             </div>
         );
-    }
+    };
 
-    disabledDate(currentDate, month) {
+    disabledDate = (currentDate, month) => {
         if (
             currentDate.isBefore(moment(month.start_time).startOf('month')) ||
             currentDate.isAfter(moment(month.end_time).endOf('month'))
@@ -168,7 +160,7 @@ class MultiDatePicker extends Component {
             return false;
         }
         return true;
-    }
+    };
 
     render() {
         return <div className="calendars">{this.getCalendars()}</div>;
